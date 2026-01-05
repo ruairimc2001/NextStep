@@ -1,4 +1,4 @@
-package main.java.com.example.NextSteps;
+package com.example.NextSteps;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
