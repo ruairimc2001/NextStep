@@ -33,9 +33,8 @@ function Login() {
         localStorage.setItem('userId', data.userId);
         localStorage.setItem('userEmail', data.email);
 
-        // Navigate to dashboard or home page
-        alert(`Login successful! Welcome ${data.email}`);
-        //TODO: navigate('/dashboard'); // Uncomment when dashboard is ready
+        // Navigate to profile page
+        navigate('/profile');
       } else {
         setError(data.message || 'Login failed. Please try again.');
       }
