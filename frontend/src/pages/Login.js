@@ -53,38 +53,49 @@ function Login() {
 
   return (
     <div className="login-container">
-      <div className="login-card">
-        <h1 style={{ textAlign: 'center', marginBottom: '1rem', fontFamily: 'Segoe UI, sans-serif', color: '#1976d2', fontSize: '2rem', letterSpacing: '1px' }}>NextStep</h1>
-        <h2>Login</h2>
-        {error && <div style={{ color: 'red', marginBottom: '1rem', textAlign: 'center' }}>{error}</div>}
-        <form onSubmit={handleLogin}>
-          <div>
-            <label>Username:</label>
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-              disabled={loading}
-            />
+      <div className="login-wrapper">
+        <div className="login-card">
+          <h1 style={{ textAlign: 'left', marginBottom: '1rem', fontFamily: 'Poppins, sans-serif', color: '#000000', fontSize: '2rem', fontWeight: '800', letterSpacing: '1px' }}>
+            Welcome to<br />NextSteps
+          </h1>
+          {error && <div style={{ color: '#ff6b6b', marginBottom: '1rem', textAlign: 'center' }}>{error}</div>}
+          <form onSubmit={handleLogin}>
+            <div>
+              <input
+                type="text"
+                placeholder="Email"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+                disabled={loading}
+              />
+            </div>
+            <div>
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                disabled={loading}
+              />
+            </div>
+            <button type="submit" disabled={loading}>
+              {loading ? 'Logging in...' : 'Login'}
+            </button>
+          </form>
+          <div className="bottom-links">
+            <button type="button" className="forgot-password-link">
+              Forgot Password?
+            </button>
+            <button type="button" className="register-link" onClick={goToRegister}>
+              Create Account
+            </button>
           </div>
-          <div>
-            <label>Password:</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              disabled={loading}
-            />
-          </div>
-          <button type="submit" disabled={loading}>
-            {loading ? 'Logging in...' : 'Login'}
-          </button>
-        </form>
-        <button type="button" className="register-link" onClick={goToRegister}>
-          Register
-        </button>
+        </div>
+        <div className="login-image">
+          <img src="/login-image.png" alt="Welcome illustration" />
+        </div>
       </div>
     </div>
   );
