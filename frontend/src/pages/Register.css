@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
-.login-container {
+.register-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,18 +8,18 @@
   background: rgb(25, 33, 47); /* Custom dark blue-gray background */
 }
 
-.login-wrapper {
+.register-wrapper {
   display: flex;
   align-items: center;
   gap: 3rem;
 }
 
-.login-image {
+.register-image {
   flex: 1;
   max-width: 400px;
 }
 
-.login-image img {
+.register-image img {
   width: 100%;
   height: auto;
   object-fit: contain;
@@ -27,19 +27,19 @@
 
 /* Hide image on smaller screens */
 @media (max-width: 900px) {
-  .login-wrapper {
+  .register-wrapper {
     flex-direction: column;
   }
 
-  .login-image {
+  .register-image {
     display: none;
   }
 }
 
-.login-card {
+.register-card {
   background: #ffffff; /* White */
   padding: 3rem 4rem;
-  border-radius: 8px;
+  border-radius: 50px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.4);
   width: 500px;
   max-width: 90vw;
@@ -47,80 +47,83 @@
   font-family: 'Poppins', sans-serif;
 }
 
-.login-card h1 {
+.register-card h1 {
   color: #000000 !important; /* Black */
+  font-weight: 800 !important;
 }
 
-.login-card h2 {
+.register-card h2 {
   margin-bottom: 1.5rem;
   font-family: 'Poppins', sans-serif;
   color: #000000; /* Black */
   text-align: center;
-  font-weight: 600;
+  font-weight: 700;
 }
 
-.login-card label {
+.register-card label {
   display: block;
   margin-bottom: 0.3rem;
   color: #000000; /* Black */
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
-.login-card input {
+.register-card input {
   width: 100%;
   padding: 0.7rem;
   margin-bottom: 1rem;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 12px;
   font-size: 1rem;
   box-sizing: border-box;
-  background-color: #ffffff; /* White */
+  background-color: #E5E4E2;
   color: #000000; /* Black */
   transition: border-color 0.3s;
+  font-weight: 500;
 }
 
-.login-card input::placeholder {
+.register-card input::placeholder {
   color: #999999; /* Grey */
   opacity: 1;
+  font-weight: 500;
 }
 
-.login-card input:focus {
+.register-card input:focus {
   outline: none;
-  border-color: #d4af37; /* Dark yellow */
+  border-color: #36454F; /* Dark yellow */
 }
 
-.login-card button[type="submit"] {
+.register-card button[type="submit"] {
   width: 30%;
   padding: 0.6rem;
-  background: rgb(238, 173, 42); /* Bright yellow */
+  background: rgb(224, 164, 60); /* Bright yellow */
   color: #ffffff; /* White text */
   border: none;
   border-radius: 10px;
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   margin-bottom: 0.5rem;
   display: block;
   transition: background 0.3s;
 }
 
-.login-card button[type="submit"]:hover:not(:disabled) {
+.register-card button[type="submit"]:hover:not(:disabled) {
   background: rgb(220, 160, 38); /* Slightly darker yellow */
 }
 
-.login-card button[type="submit"]:disabled {
+.register-card button[type="submit"]:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-.bottom-links {
+.register-card .bottom-links {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-top: 1.5rem;
 }
 
-.login-card .register-link {
+.register-card .login-link {
   color: #000000; /* Black */
   text-decoration: underline;
   font-size: 0.9rem;
@@ -132,23 +135,7 @@
   font-weight: 600;
 }
 
-.login-card .register-link:hover {
-  color: rgb(238, 173, 42); /* Yellow on hover */
-}
-
-.login-card .forgot-password-link {
-  color: #000000; /* Black */
-  text-decoration: underline;
-  font-size: 0.9rem;
-  background: transparent;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  transition: color 0.3s;
-  font-weight: 600;
-}
-
-.login-card .forgot-password-link:hover {
+.register-card .login-link:hover {
   color: rgb(238, 173, 42); /* Yellow on hover */
 }
 
