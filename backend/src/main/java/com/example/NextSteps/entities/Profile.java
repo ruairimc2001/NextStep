@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.UUID;
-import com.example.NextSteps.entities.User;
 
 @Data
 @Entity
@@ -21,14 +21,20 @@ public class Profile {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @Column(name = "first_name", length = 100)
+    private String firstName;
+
+    @Column(name = "surname", length = 100)
+    private String surname;
+
     @Column(name = "goal_title", length = 255)
     private String goalTitle;
 
-    @Column(name = "skills_text", columnDefinition = "text")
-    private String skillsText;
+    @Column(name = "skills", columnDefinition = "text[]")
+    private List<String> skills;
 
-    @Column(name = "interests_text", columnDefinition = "text")
-    private String interestsText;
+    @Column(name = "interests", columnDefinition = "text[]")
+    private List<String> interests;
 
     @Column(name = "updated_at", nullable = false)
     private OffsetDateTime updatedAt;

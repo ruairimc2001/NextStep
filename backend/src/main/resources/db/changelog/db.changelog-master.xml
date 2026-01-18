@@ -8,4 +8,5 @@
 
     <include file="db/changelog/changes/NS-003-init.sql"/>
     <include file="db/changelog/changes/NS-004-insert-dummy-data.sql"/>
+    <include file="db/changelog/changes/NS-005-update-profiles-structure.sql"/>
 </databaseChangeLog>
