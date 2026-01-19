@@ -1,6 +1,6 @@
 -- liquibase formatted sql
+--changeset ruairi:NS-004-insert-dummy-data runOnChange:true
 
--- changeset ruairi:NS-004-insert-dummy-data
 INSERT INTO users (id, email, password_hash, created_at) VALUES
     ('a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11', 'john.doe@example.com', 'password123', NOW()),
     ('b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a22', 'jane.smith@example.com', 'password456', NOW()),
