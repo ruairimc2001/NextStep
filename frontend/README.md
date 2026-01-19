@@ -21,3 +21,14 @@ This folder contains the React-based frontend for the NextSteps application.
 3. Open [http://localhost:3000](http://localhost:3000) in your browser to view the app.
 
 
+4. Docker set up 
+# Start everything
+docker compose up -d
+
+# Fresh database (fixes Liquibase checksum issues)
+docker compose down -v && docker compose up -d
+
+# Stop everything
+docker compose down
+
+
