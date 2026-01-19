@@ -72,7 +72,7 @@ function Profile() {
     <div className="profile-container">
       <div className="profile-card">
         <div className="profile-header">
-          <h1 className="brand-title">NextStep</h1>
+          <h1 className="brand-title">NextSteps</h1>
           <div className="user-info">
             <h2 className="user-name">
               {[profile?.firstName, profile?.surname].filter(Boolean).join(' ') || 'User'}
@@ -81,7 +81,45 @@ function Profile() {
           </div>
         </div>
 
-        {/* Career Goal - Prominent Display */}
+        {/* My Skills - Large Card */}
+        <div className="skills-container">
+          <h2 className="skills-main-title">My Skills</h2>
+
+          <div className="skills-cards-wrapper">
+            {/* Current Skills - Smaller Card */}
+            <div className="skills-inner-card">
+              <h3 className="inner-card-title">
+                <span className="section-icon">💡</span>
+                Current Skills
+              </h3>
+              {profile?.skills && profile.skills.length > 0 ? (
+                <div className="tags-container">
+                  {profile.skills.map((skill, index) => (
+                    <span key={index} className="tag skill-tag">{skill.trim()}</span>
+                  ))}
+                </div>
+              ) : (
+                <p className="empty-message">No skills added yet</p>
+              )}
+            </div>
+
+            {/* Suggested Skills - Smaller Card */}
+            <div className="skills-inner-card">
+              <h3 className="inner-card-title">
+                <span className="section-icon">✨</span>
+                Suggested Skills
+              </h3>
+              <div className="tags-container">
+                <span className="tag suggested-tag">React</span>
+                <span className="tag suggested-tag">Node.js</span>
+                <span className="tag suggested-tag">Python</span>
+                <span className="tag suggested-tag">AWS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Career Goal */}
         {profile?.goalTitle ? (
           <div className="goal-section">
             <div className="goal-icon">🎯</div>
@@ -99,23 +137,6 @@ function Profile() {
             </div>
           </div>
         )}
-
-        {/* Skills Section */}
-        <div className="skills-section">
-          <h3 className="section-title">
-            <span className="section-icon">💡</span>
-            Skills
-          </h3>
-          {profile?.skills && profile.skills.length > 0 ? (
-            <div className="tags-container">
-              {profile.skills.map((skill, index) => (
-                <span key={index} className="tag skill-tag">{skill.trim()}</span>
-              ))}
-            </div>
-          ) : (
-            <p className="empty-message">No skills added yet</p>
-          )}
-        </div>
 
         {/* Interests Section */}
         <div className="interests-section">

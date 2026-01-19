@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 import java.util.UUID;
 
+//Using JpaRepository in order to skip boilerplate SQL code
 @Repository
 public interface ProfileRepository extends JpaRepository<Profile, UUID> {
 
