@@ -11,19 +11,31 @@ function Profile() {
   useEffect(() => {
     const fetchProfile = async () => {
       const userId = localStorage.getItem('userId');
+      const token = localStorage.getItem('token');
 
-      if (!userId) {
-        // If no userId in localStorage, redirect to login
+      if (!userId || !token) {
+        // If no userId or token in localStorage, redirect to login
         navigate('/');
         return;
       }
 
       try {
-        const response = await fetch(`http://localhost:8080/api/profile/${userId}`);
+        const response = await fetch(`http://localhost:8080/api/profile/${userId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
 
         if (response.ok) {
           const data = await response.json();
           setProfile(data);
+        } else if (response.status === 401) {
+          // Token expired or invalid, redirect to login
+          localStorage.removeItem('userId');
+          localStorage.removeItem('userEmail');
+          localStorage.removeItem('token');
+          navigate('/');
         } else if (response.status === 404) {
           setError('Profile not found');
         } else {
@@ -43,6 +55,7 @@ function Profile() {
   const handleLogout = () => {
     localStorage.removeItem('userId');
     localStorage.removeItem('userEmail');
+    localStorage.removeItem('token');
     navigate('/');
   };
 

@@ -9,6 +9,12 @@ spring:
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/db.changelog-master.xml
+
+# JWT Configuration
+jwt:
+  secret: NextStepsSecretKeyForJWTTokenGeneration2024SecureKey!
+  expiration: 86400000  # 24 hours in milliseconds
+
 ai:
   provider: ollama
   ollama:

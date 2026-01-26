@@ -4,6 +4,8 @@ import com.example.NextSteps.dto.LoginRequest;
 import com.example.NextSteps.dto.LoginResponse;
 import com.example.NextSteps.entities.User;
 import com.example.NextSteps.repository.UserRepository;
+import com.example.NextSteps.security.JwtUtil;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,32 +14,41 @@ import java.util.Optional;
 public class LoginAuthenticationService {
 
     private final UserRepository userRepository;
+    private final JwtUtil jwtUtil;
+    private final PasswordEncoder passwordEncoder;
 
-    public LoginAuthenticationService(UserRepository userRepository) {
+    public LoginAuthenticationService(UserRepository userRepository, JwtUtil jwtUtil, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.jwtUtil = jwtUtil;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public LoginResponse login(LoginRequest loginRequest) {
 
         Optional<User> userOptional = userRepository.findByEmail(loginRequest.getUsername());
 
-        //TODO: Implement proper error handling
         if (userOptional.isEmpty()) {
-            return new LoginResponse(false, "User not found", null, null);
+            return new LoginResponse(false, "User not found", null, null, null);
         }
 
         User user = userOptional.get();
 
-        // TODO: Implement proper password hashing verification
         if (!verifyPassword(loginRequest.getPassword(), user.getPasswordHash())) {
-            return new LoginResponse(false, "Invalid password", null, null);
+            return new LoginResponse(false, "Invalid password", null, null, null);
         }
 
-        return new LoginResponse(true, "Login successful", user.getId(), user.getEmail());
+        // Generate JWT token
+        String token = jwtUtil.generateToken(user.getId(), user.getEmail());
+
+        return new LoginResponse(true, "Login successful", user.getId(), user.getEmail(), token);
     }
 
     private boolean verifyPassword(String rawPassword, String hashedPassword) {
-        // TODO: Implement proper password verification with BCrypt
+        // Check if the stored password is already hashed (starts with $2a$ for BCrypt)
+        if (hashedPassword.startsWith("$2a$") || hashedPassword.startsWith("$2b$")) {
+            return passwordEncoder.matches(rawPassword, hashedPassword);
+        }
+        // Fallback for plain text passwords (for existing data - should be migrated)
         return rawPassword.equals(hashedPassword);
     }
 }
