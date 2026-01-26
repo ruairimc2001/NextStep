@@ -10,7 +10,7 @@ function App() {
       <Route path="/" element={<Login />} />
       <Route path="/login" element={<Login />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/register" element={<div style={{ maxWidth: 400, margin: 'auto', padding: 20 }}><h2>Register</h2><p>Registration page coming soon.</p></div>} />
+      <Route path="/register" element={<Register />} />
     </Routes>
   );
 }
