@@ -1,11 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
+/* Page wrapper */
+.profile-page {
+  min-height: 100vh;
+  background: rgb(25, 33, 47);
+}
+
 .profile-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background: rgb(25, 33, 47); /* Same dark blue-gray as login */
+  min-height: calc(100vh - 60px);
   padding: 20px;
 }
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../../components/Navbar';
 import './Profile.css';
 
 function Profile() {
@@ -13,7 +14,6 @@ function Profile() {
       const userId = localStorage.getItem('userId');
 
       if (!userId) {
-        // If no userId in localStorage, redirect to login
         navigate('/');
         return;
       }
@@ -48,9 +48,12 @@ function Profile() {
 
   if (loading) {
     return (
-      <div className="profile-container">
-        <div className="profile-card">
-          <p>Loading profile...</p>
+      <div className="profile-page">
+        <Navbar />
+        <div className="profile-container">
+          <div className="profile-card">
+            <p>Loading profile...</p>
+          </div>
         </div>
       </div>
     );
@@ -58,30 +61,35 @@ function Profile() {
 
   if (error) {
     return (
-      <div className="profile-container">
-        <div className="profile-card">
-          <h2>Error</h2>
-          <p style={{ color: 'red' }}>{error}</p>
-          <button onClick={handleLogout}>Back to Login</button>
+      <div className="profile-page">
+        <Navbar />
+        <div className="profile-container">
+          <div className="profile-card">
+            <h2>Error</h2>
+            <p style={{ color: 'red' }}>{error}</p>
+            <button onClick={handleLogout}>Back to Login</button>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="profile-container">
-      <div className="profile-card">
-        <div className="profile-header">
-          <h1 className="brand-title">NextSteps</h1>
-          <div className="user-info">
-            <h2 className="user-name">
-              {[profile?.firstName, profile?.surname].filter(Boolean).join(' ') || 'User'}
-            </h2>
-            <p className="user-email">{profile?.email}</p>
+    <div className="profile-page">
+      <Navbar />
+      <div className="profile-container">
+        <div className="profile-card">
+          <div className="profile-header">
+            <h1 className="brand-title">NextSteps</h1>
+            <div className="user-info">
+              <h2 className="user-name">
+                {[profile?.firstName, profile?.surname].filter(Boolean).join(' ') || 'User'}
+              </h2>
+              <p className="user-email">{profile?.email}</p>
+            </div>
           </div>
-        </div>
 
-        {/* My Skills - Large Card */}
+          {/* My Skills - Large Card */}
         <div className="skills-container">
           <h2 className="skills-main-title">My Skills</h2>
 
@@ -167,6 +175,7 @@ function Profile() {
         <div className="profile-actions">
           <button onClick={handleLogout} className="logout-button">Logout</button>
         </div>
+      </div>
       </div>
     </div>
   );
