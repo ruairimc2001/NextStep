@@ -29,9 +29,10 @@ function Login() {
       const data = await response.json();
 
       if (response.ok && data.success) {
-        //Look at this as an example of storing data in the future
+        // Store authentication data
         localStorage.setItem('userId', data.userId);
         localStorage.setItem('userEmail', data.email);
+        localStorage.setItem('token', data.token);
 
         // Navigate to profile page
         navigate('/profile');
