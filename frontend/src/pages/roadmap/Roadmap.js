@@ -12,10 +12,15 @@ function Roadmap() {
   useEffect(() => {
     const fetchProfile = async () => {
       const userId = localStorage.getItem('userId');
+      const token = localStorage.getItem('token');
       if (!userId) return;
 
       try {
-        const response = await fetch(`http://localhost:8080/api/profile/${userId}`);
+        const response = await fetch(`http://localhost:8080/api/profile/${userId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
         if (response.ok) {
           const data = await response.json();
           setProfile(data);
@@ -34,12 +39,14 @@ function Roadmap() {
     setCurrentStageIndex(0);
 
     const userId = localStorage.getItem('userId');
+    const token = localStorage.getItem('token');
 
     try {
       const response = await fetch('http://localhost:8080/api/roadmaps/generate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
           userId: userId,

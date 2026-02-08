@@ -14,5 +14,6 @@ public class LoginResponse {
     private String message;
     private UUID userId;
     private String email;
+    private String token;
 }
 
