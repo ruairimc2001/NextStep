@@ -74,4 +74,20 @@ public class RoadmapService {
 
         return aiRoadMapProvider.generateRoadmap(profile);
     }
+
+    public void deleteRoadmap(UUID roadmapId, UUID userId) {
+        Roadmap roadmap = roadmapRepository.findById(roadmapId)
+                .orElseThrow(() -> new RuntimeException("Roadmap not found with id: " + roadmapId));
+
+        // Verify the roadmap belongs to the authenticated user
+        if (roadmap.getUser() == null || !roadmap.getUser().getId().equals(userId)) {
+            throw new RuntimeException("You don't have permission to delete this roadmap");
+        }
+
+        try {
+            roadmapRepository.deleteById(roadmapId);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to delete roadmap: " + e.getMessage(), e);
+        }
+    }
 }

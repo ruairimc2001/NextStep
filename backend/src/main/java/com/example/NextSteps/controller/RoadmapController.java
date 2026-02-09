@@ -7,6 +7,7 @@ import com.example.NextSteps.service.RoadmapService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,6 +36,28 @@ public class RoadmapController {
         return roadmapService.getRoadmapById(roadmapId)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{roadmapId}")
+    public ResponseEntity<Void> deleteRoadmap(@PathVariable UUID roadmapId, Authentication authentication) {
+        try {
+            if (authentication == null || !authentication.isAuthenticated()) {
+                return ResponseEntity.status(401).build();
+            }
+            String userId = authentication.getName();
+            roadmapService.deleteRoadmap(roadmapId, UUID.fromString(userId));
+            return ResponseEntity.noContent().build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(400).build();
+        } catch (RuntimeException e) {
+            if (e.getMessage().contains("not found")) {
+                return ResponseEntity.notFound().build();
+            }
+            if (e.getMessage().contains("permission")) {
+                return ResponseEntity.status(403).build();
+            }
+            return ResponseEntity.status(500).build();
+        }
     }
 }
 
