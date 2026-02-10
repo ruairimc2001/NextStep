@@ -31,32 +31,25 @@ public class ProfileService {
         User user = userOptional.get();
         Optional<Profile> profileOptional = profileRepository.findByUserId(userId);
 
-        // If profile doesn't exist, return basic user info
         if (profileOptional.isEmpty()) {
-            ProfileResponse response = new ProfileResponse(
-                user.getId(),
-                user.getEmail(),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-            );
+            ProfileResponse response = ProfileResponse.builder()
+                .userId(user.getId())
+                .email(user.getEmail())
+                .build();
             return Optional.of(response);
         }
 
         Profile profile = profileOptional.get();
-        ProfileResponse response = new ProfileResponse(
-            user.getId(),
-            user.getEmail(),
-            profile.getFirstName(),
-            profile.getSurname(),
-            profile.getGoalTitle(),
-            profile.getSkills(),
-            profile.getInterests(),
-            profile.getUpdatedAt()
-        );
+        ProfileResponse response = ProfileResponse.builder()
+            .userId(user.getId())
+            .email(user.getEmail())
+            .firstName(profile.getFirstName())
+            .surname(profile.getSurname())
+            .goalTitle(profile.getGoalTitle())
+            .skills(profile.getSkills())
+            .interests(profile.getInterests())
+            .updatedAt(profile.getUpdatedAt())
+            .build();
 
         return Optional.of(response);
     }
